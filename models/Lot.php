@@ -51,6 +51,7 @@ class Lot extends \yii\db\ActiveRecord
             'address' => 'Адрес',
             'type' => 'Тип',
             'start_price' => 'Начальная цена',
+            'dateStart' => 'Дата начала торгов',
         ];
     }
 
@@ -59,10 +60,12 @@ class Lot extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getMessage()
+    public function getMessages()
     {
         return $this->hasOne(Message::class, ['message_number' => 'message_number']);
     }
+
+
 
 
 }

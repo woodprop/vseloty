@@ -4,13 +4,16 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Lot;
 
 /**
  * LotSearch represents the model behind the search form of `app\models\Lot`.
  */
 class LotSearch extends Lot
 {
+
+    public $priceMin;
+    public $priceMax;
+
     /**
      * {@inheritdoc}
      */
@@ -19,6 +22,7 @@ class LotSearch extends Lot
         return [
             [['id', 'start_price'], 'integer'],
             [['message_number', 'description', 'address', 'type'], 'safe'],
+            [['priceMin', 'priceMax'], 'number'],
         ];
     }
 
@@ -40,12 +44,13 @@ class LotSearch extends Lot
      */
     public function search($params)
     {
-        $query = Lot::find()->with('message');
+        $query = Lot::find()->joinWith('messages');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => ['attributes' => ['start_price', 'messages.date_start']],
         ]);
 
         $this->load($params);
@@ -62,11 +67,12 @@ class LotSearch extends Lot
             'start_price' => $this->start_price,
         ]);
 
-        $query->andFilterWhere(['like', 'message_number', $this->message_number])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'address', $this->address])
-            ->andFilterWhere(['like', 'type', $this->type]);
 
+        $query->andFilterWhere(['like', 'lots.message_number', $this->message_number])
+            ->andFilterWhere(['like', 'lots.description', $this->description])
+            ->andFilterWhere(['like', 'address', $this->address])
+            ->andFilterWhere(['like', 'type', $this->type])
+            ->andFilterWhere(['between', 'start_price', $this->priceMin, $this->priceMax]);
         return $dataProvider;
     }
 }
