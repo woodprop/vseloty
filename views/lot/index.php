@@ -27,8 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'message_number',
                     'value' => function($data){
-                        $link = str_replace('http:', 'http://', $data->messages->link);
-                        return Html::a($data->message_number, $link, ['target' => '_blank']);
+//                        $link = str_replace('http:', 'http://', $data->messages->link);
+                        return Html::a($data->message_number, ['message/view', 'message_number' => $data->message_number], ['target' => '_blank']);
                     },
                     'format' => 'raw',
                     ],
@@ -38,7 +38,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'start_price',
                     'value' => function($data){
-                        return number_format($data->start_price, 0, '.', '&nbsp;') . '&nbsp;&#8381;';
+                        $price = number_format($data->start_price, 0, '.', '&nbsp;') . '&nbsp;&#8381;';
+                        if ($data->messages->auction_type == "Публичное предложение") {
+                            return "<span class='text-success'><b>$price</b></span>";
+                        }elseif ($data->messages->auction_type == "Открытый аукцион"){
+                            return "<span class='text-danger'><b>$price</b></span>";
+                        }
+                        return $price;
                     },
                     'format' => 'raw',
                 ],

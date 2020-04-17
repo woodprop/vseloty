@@ -50,14 +50,14 @@ class Message extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'inn' => 'Inn',
-            'date_pub' => 'Date Pub',
-            'message_number' => 'Message Number',
-            'description' => 'Description',
-            'auction_type' => 'Auction Type',
-            'date_start' => 'Date Start',
-            'place' => 'Place',
-            'link' => 'Link',
+            'inn' => 'ИНН должника',
+            'date_pub' => 'Дата публикации',
+            'message_number' => 'Номер сообщения',
+            'description' => 'Описание',
+            'auction_type' => 'Тип аукциона',
+            'date_start' => 'Начало приёма заявок',
+            'place' => 'Место проведения',
+            'link' => 'Ссылка',
         ];
     }
 

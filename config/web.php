@@ -52,6 +52,8 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => false,
             'rules' => [
+                'message/<message_number:\d+>' => 'message/view',
+                'lot' => 'lot/index',
             ],
         ],
     ],
