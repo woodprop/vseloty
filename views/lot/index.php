@@ -21,14 +21,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'dataProvider' => $dataProvider,
             'options' => ['class' => 'card mt-5'],
             'summaryOptions' => ['class' => 'card-header'],
-            'tableOptions' => ['class' => 'table table-hover'],
+            'tableOptions' => ['class' => 'table table-responsive table-borderless'],
 //            'filterModel' => $searchModel,
             'columns' => [
                 [
                     'attribute' => 'message_number',
                     'value' => function($data){
-//                        $link = str_replace('http:', 'http://', $data->messages->link);
-                        return Html::a($data->message_number, ['message/view', 'message_number' => $data->message_number], ['target' => '_blank']);
+                        $link = str_replace('http:', 'http://', $data->messages->link);
+                        return Html::a($data->message_number, $link, ['target' => '_blank']);
                     },
                     'format' => 'raw',
                     ],
@@ -49,9 +49,30 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format' => 'raw',
                 ],
                 'messages.date_start:dateTime',
+                'messages.date_pub:date',
 
                 ['class' => 'yii\grid\ActionColumn'],
             ],
+            'beforeRow' => function($data){
+                $class = 'bg-dark';
+                if ($data->messages->auction_type == "Публичное предложение") $class = 'bg-success';
+                if ($data->messages->auction_type == "Открытый аукцион") $class = 'bg-danger';
+                return "<tr class='{$class}'>
+                            <td colspan='6'>
+                                <h5 class='text-center text-white'>{$data->messages->auction_type}</h5>
+                            </td>
+                        </tr>";
+            },
+            'afterRow' => function($data){
+                return "<tr>
+                            <td></td>
+                            <td colspan='5'>
+                                <a href='' class='btn btn-danger'>Карточка должника</a>
+                                <a href='' class='btn btn-secondary'>Площадка торгов</a>
+                                <a href='' class='btn btn-warning'>Все лоты должника</a>
+                            </td>
+                        </tr>";
+            },
         ]); ?>
 
 

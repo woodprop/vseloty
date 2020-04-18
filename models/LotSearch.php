@@ -50,7 +50,7 @@ class LotSearch extends Lot
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => ['attributes' => ['start_price', 'messages.date_start']],
+            'sort' => ['attributes' => ['start_price', 'messages.date_start', 'messages.date_pub']],
         ]);
 
         $this->load($params);
