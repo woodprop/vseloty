@@ -20,11 +20,7 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'message_number') ?>
-
     <?= $form->field($model, 'description') ?>
-
-    <?= $form->field($model, 'address') ?>
 
     <?php // echo $form->field($model, 'start_price') ?>
 
