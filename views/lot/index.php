@@ -11,6 +11,10 @@ $this->title = 'Лоты';
 $this->params['breadcrumbs'][] = $this->title;
 
 $lots = $dataProvider->getModels();
+$pages = $dataProvider->pagination;
+
+$firstLotNumber = $pages->page ? $pages->page * $pages->pageSize + 1 : 1;
+$lastLotNumber = $pages->page ? ($pages->page + 1) * $pages->pageSize : $pages->pageSize;
 
 ?>
 
@@ -22,9 +26,14 @@ $lots = $dataProvider->getModels();
 
         <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
 
+        <?= "Показаны лоты $firstLotNumber - $lastLotNumber из $dataProvider->totalCount" ?>
+
+        <?= 'Сортировка: ' . $dataProvider->sort->link('start_price') . ' | ' . $dataProvider->sort->link('messages.date_pub') . ' | ' . $dataProvider->sort->link('messages.date_start') ?>
+
         <?php foreach ($lots as $lot):
             $cardHeaderBg = 'bg-dark';
             $messageLink = str_replace('http:', 'http://', $lot->messages->link);
+            $debtorLink = isset($lot->messages->debtor) ? $lot->messages->debtor->link : null;
             $price = number_format($lot->start_price, 0, '.', '&nbsp;') . '&nbsp;&#8381;';
             $priceNode = "<span><b>$price</b></span>";
             if ($lot->messages->auction_type == "Публичное предложение") {
@@ -72,13 +81,13 @@ $lots = $dataProvider->getModels();
 
                 <div class="row">
                     <div class="mt-3 col-sm-12 col-md">
-                        <a href="" class="btn btn-block btn-info">Объявление о торгах</a>
+                        <a href="<?= $messageLink ?>" target="_blank" class="btn btn-block btn-info">Объявление о торгах</a>
                     </div>
                     <div class="mt-3 col-sm-12 col-md">
-                        <a href="" class="btn btn-block btn-secondary disabled">Площадка торгов</a>
+                        <a href="#" class="btn btn-block btn-secondary disabled">Площадка торгов</a>
                     </div>
                     <div class="mt-3 col-sm-12 col-md">
-                        <a href="" class="btn btn-block btn-danger">Карточка должника</a>
+                        <a href="<?= $debtorLink ?>" class="btn btn-block btn-danger <?php if (!$debtorLink) echo 'disabled'; ?>">Карточка должника</a>
                     </div>
                     <div class="mt-3 col-sm-12 col-md">
                         <a href="" class="btn btn-block btn-warning">Все лоты должника</a>
@@ -87,10 +96,9 @@ $lots = $dataProvider->getModels();
                 </div>
             </div>
         </div>
-
-
         <?php endforeach; ?>
 
+        <?= \yii\bootstrap4\LinkPager::widget(['pagination' => $pages]) ?>
 
     </div>
 </div>

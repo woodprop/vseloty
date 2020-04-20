@@ -40,7 +40,7 @@ class MessageSearch extends Message
      */
     public function search($params)
     {
-        $query = Message::find()->with('lots');
+        $query = Message::find()->with('debtors');
 
         // add conditions that should always apply here
 

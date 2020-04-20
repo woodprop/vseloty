@@ -70,4 +70,8 @@ class Message extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Lot::class, ['message_number' => 'message_number']);
     }
+
+    public function getDebtor(){
+        return $this->hasOne(Debtor::class, ['id' => 'inn']);
+    }
 }
