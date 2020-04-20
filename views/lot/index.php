@@ -38,35 +38,50 @@ $lots = $dataProvider->getModels();
             ?>
 
         <div class="card mt-5">
-            <div class="card-header <?= $cardHeaderBg ?> text-white d-flex justify-content-between">
-                <b>№ сообщения: <?= Html::a($lot->message_number, $messageLink, ['target' => '_blank', 'class' => 'text-white']) ?></b>
-                <span><?= $lot->messages->auction_type ?></span>
-                <span class="">Дата публикации: <?= date_format(date_create($lot->messages->date_pub), 'd-m-Y') ?></span>
+            <div class="card-header <?= $cardHeaderBg ?> text-white">
+                <div class="row">
+                    <div class="col-sm-12 col-md">
+                        <b>№ сообщения: <?= Html::a($lot->message_number, $messageLink, ['target' => '_blank', 'class' => 'text-white']) ?></b>
+
+                    </div>
+                    <div class="col-sm-12 col-md text-center">
+                        <span><?= $lot->messages->auction_type ?></span>
+
+                    </div>
+                    <div class="col-sm-12 col-md text-right">
+                        <span>Дата публикации: <?= date_format(date_create($lot->messages->date_pub), 'd-m-Y') ?></span>
+
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-9">
                         <?= $lot->description ?>
                     </div>
-                    <div class="col-md-3">
-                        <h6>Начальная цена:</h6>
+                    <div class="col-md-3 mt-sm-3 mt-md-0">
+                        <h5>Начальная цена:</h5>
                         <?= $priceNode ?>
                     </div>
                 </div>
-                <hr>
-                <h5 class="text-right">Начало подачи заявок: <?= $lot->messages->date_start ?></h5>
                 <div class="row">
                     <div class="col">
-                        <a href="" class="btn btn-info">Объявление о торгах</a>
+                        <h5 class="mt-sm-3 mt-md-0 text-right">Начало подачи заявок: <?= $lot->messages->date_start ?></h5>
                     </div>
-                    <div class="col">
-                        <a href="" class="btn btn-secondary disabled">Площадка торгов</a>
+                </div>
+
+                <div class="row">
+                    <div class="mt-3 col-sm-12 col-md">
+                        <a href="" class="btn btn-block btn-info">Объявление о торгах</a>
                     </div>
-                    <div class="col">
-                        <a href="" class="btn btn-danger">Карточка должника</a>
+                    <div class="mt-3 col-sm-12 col-md">
+                        <a href="" class="btn btn-block btn-secondary disabled">Площадка торгов</a>
                     </div>
-                    <div class="col">
-                        <a href="" class="btn btn-warning">Все лоты должника</a>
+                    <div class="mt-3 col-sm-12 col-md">
+                        <a href="" class="btn btn-block btn-danger">Карточка должника</a>
+                    </div>
+                    <div class="mt-3 col-sm-12 col-md">
+                        <a href="" class="btn btn-block btn-warning">Все лоты должника</a>
                     </div>
 
                 </div>
