@@ -8,11 +8,11 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 <div class="lot-search">
-<div class="card">
+<div class="card mb-3">
 
 
     <div class="card-header">
-        Поиск
+        <b>Поиск</b>
     </div>
     <div class="card-body">
     <?php $form = ActiveForm::begin([
@@ -20,16 +20,26 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'description') ?>
+    <?= $form->field($model, 'description', ['template' => '{input}'])->textInput(['placeholder' => 'Описание']) ?>
 
     <?php // echo $form->field($model, 'start_price') ?>
 
-    <?= $form->field($model, 'priceMin') ?>
-    <?= $form->field($model, 'priceMax') ?>
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col">
+                    <?= $form->field($model, 'priceMin', ['template' => '{input}'])->textInput(['placeholder' => 'Цена MIN']) ?>
+                </div>
+                <h4> - </h4>
+                <div class="col">
+                    <?= $form->field($model, 'priceMax',  ['template' => '{input}'])->textInput(['placeholder' => 'Цена MAX']) ?>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="form-group">
-        <?= Html::submitButton('Искать', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton('Искать', ['class' => 'btn btn-block btn-outline-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

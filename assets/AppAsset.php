@@ -20,9 +20,10 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/style.css',
-        'css/fontawesome-all.css',
+        'https://fonts.googleapis.com/css?family=Bebas+Neue',
         'https://fonts.googleapis.com/css?family=Roboto',
+        'css/fontawesome-all.css',
+        'css/style.css',
     ];
     public $js = [
         'js/app.js'
