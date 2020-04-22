@@ -55,7 +55,7 @@ $lastLotNumber = $pages->page ? ($pages->page + 1) * $pages->pageSize : $pages->
 
                 </div>
                 <div class="col-sm-12 col-md text-right">
-                    <span>Дата публикации: <?= date_format(date_create($lot->messages->date_pub), 'd-m-Y') ?></span>
+                    <span>Дата публикации: <?= date_format(date_create($lot->messages->date_pub), 'd/m/Y') ?></span>
 
                 </div>
             </div>
@@ -88,7 +88,7 @@ $lastLotNumber = $pages->page ? ($pages->page + 1) * $pages->pageSize : $pages->
             </div>
             <div class="row mt-3">
                 <div class="col">
-                    <h5 class="mt-sm-3 mt-md-0 text-right">Начало подачи заявок: <?= $lot->messages->date_start ?></h5>
+                    <h5 class="mt-sm-3 mt-md-0 text-right">Начало подачи заявок: <?= date_format(date_create($lot->messages->date_start), 'd/m/Y' ) ?></h5>
                 </div>
             </div>
 
