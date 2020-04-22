@@ -53,6 +53,7 @@ $config = [
             'enableStrictParsing' => false,
             'rules' => [
                 'message/<message_number:\d+>' => 'message/view',
+                'debtor/<id:\d+>' => 'debtor/view',
                 'lot' => 'lot/index',
             ],
         ],

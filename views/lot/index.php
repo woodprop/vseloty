@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\LotSearch */
@@ -82,7 +82,7 @@ $lastLotNumber = $pages->page ? ($pages->page + 1) * $pages->pageSize : $pages->
                     <a href="<?= $debtorLink ?>" class="btn btn-block btn-danger <?php if (!$debtorLink) echo 'disabled'; ?>">Карточка должника</a>
                 </div>
                 <div class="mt-3 col-sm-12 col-md">
-                    <a href="" class="btn btn-block btn-warning">Все лоты должника</a>
+                    <a href="<?= Url::to(['debtor/view', 'id' => $lot->messages->inn]) ?>" class="btn btn-block btn-warning">Все лоты должника</a>
                 </div>
 
             </div>

@@ -47,4 +47,8 @@ class Debtor extends \yii\db\ActiveRecord
             'link' => 'Link',
         ];
     }
+
+    public function getMessages(){
+        return $this->hasMany(Message::class, ['inn' => 'id']);
+    }
 }

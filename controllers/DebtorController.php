@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Lot;
-use app\models\LotSearch;
+use app\models\Debtor;
+use app\models\DebtorSearch;
 use app\controllers\AppController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * LotController implements the CRUD actions for Lot model.
+ * DebtorController implements the CRUD actions for Debtor model.
  */
-class LotController extends AppController
+class DebtorController extends AppController
 {
     /**
      * {@inheritdoc}
@@ -21,7 +21,7 @@ class LotController extends AppController
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::class,
+                'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -30,12 +30,12 @@ class LotController extends AppController
     }
 
     /**
-     * Lists all Lot models.
+     * Lists all Debtor models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new LotSearch();
+        $searchModel = new DebtorSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,8 +45,8 @@ class LotController extends AppController
     }
 
     /**
-     * Displays a single Lot model.
-     * @param integer $id
+     * Displays a single Debtor model.
+     * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -59,15 +59,15 @@ class LotController extends AppController
 
 
     /**
-     * Finds the Lot model based on its primary key value.
+     * Finds the Debtor model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Lot the loaded model
+     * @param string $id
+     * @return Debtor the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Lot::findOne($id)) !== null) {
+        if (($model = Debtor::findOne($id)) !== null) {
             return $model;
         }
 
