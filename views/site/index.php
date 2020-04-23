@@ -1,3 +1,7 @@
+<?php
+/* @var $this yii\web\View */
+$this->title = Yii::$app->name;
+?>
 <!-- about -->
 <section class="about">
     <div class="container-fluid">

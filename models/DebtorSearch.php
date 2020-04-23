@@ -4,25 +4,20 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use app\models\Debtor;
 
 /**
- * LotSearch represents the model behind the search form of `app\models\Lot`.
+ * DebtorSearch represents the model behind the search form of `app\models\Debtor`.
  */
-class LotSearch extends Lot
+class DebtorSearch extends Debtor
 {
-
-    public $priceMin;
-    public $priceMax;
-
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'start_price'], 'integer'],
-            [['message_number', 'description', 'address', 'type'], 'safe'],
-            [['priceMin', 'priceMax'], 'number'],
+            [['id', 'name', 'type', 'link'], 'safe'],
         ];
     }
 
@@ -44,19 +39,12 @@ class LotSearch extends Lot
      */
     public function search($params)
     {
-        $query = Lot::find()->joinWith('messages');
+        $query = Debtor::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => [
-                'pageSize' => 50,
-                ],
-            'sort' => [
-                'attributes' => ['start_price', 'messages.date_start', 'messages.date_pub'],
-                'defaultOrder' => ['messages.date_pub' => SORT_DESC],
-                ],
         ]);
 
         $this->load($params);
@@ -68,17 +56,11 @@ class LotSearch extends Lot
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'start_price' => $this->start_price,
-        ]);
-
-
-        $query->andFilterWhere(['like', 'lots.message_number', $this->message_number])
-            ->andFilterWhere(['like', 'lots.description', $this->description])
-            ->andFilterWhere(['like', 'address', $this->address])
+        $query->andFilterWhere(['like', 'id', $this->id])
+            ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'type', $this->type])
-            ->andFilterWhere(['between', 'start_price', $this->priceMin, $this->priceMax]);
+            ->andFilterWhere(['like', 'link', $this->link]);
+
         return $dataProvider;
     }
 }

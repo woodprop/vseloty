@@ -7,9 +7,9 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'defaultRoute' => 'site/index',
+    'defaultRoute' => 'lot/index',
     'language' => 'ru',
-    'name' => 'ВсеЛоты.ру | ',
+    'name' => 'ВсеЛоты.ру | Все Лоты с торгов по банкротству - Недвижимость, транспорт и другое',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -53,6 +53,7 @@ $config = [
             'enableStrictParsing' => false,
             'rules' => [
                 'message/<message_number:\d+>' => 'message/view',
+                'debtor/<id:\d+>' => 'debtor/view',
                 'lot' => 'lot/index',
             ],
         ],
