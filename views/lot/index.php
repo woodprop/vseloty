@@ -62,7 +62,7 @@ $lastLotNumber = $pages->page ? ($pages->page + 1) * $pages->pageSize : $pages->
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-9">
+                <div style="max-height: 150px" class="col-md-9 overflow-auto">
                     <?= $lot->description ?>
                 </div>
                 <div class="col-md-3 mt-sm-3 mt-md-0">
